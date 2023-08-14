@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "notification-service"
+version = "0.1.0"
+description = ""
+authors = ["AlexandrZhydyk <zhydykalex@ukr.net>"]
+readme = "README.md"
+packages = [{include = "notification_service"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+redis = "^4.6.0"
+fastapi = {extras = ["all"], version = "^0.100.1"}
+sse-starlette = "^1.6.1"
+sqlalchemy = "^2.0.19"
+asyncpg = "^0.28.0"
+aiohttp = "^3.8.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
