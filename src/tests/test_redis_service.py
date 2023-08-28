@@ -5,13 +5,25 @@ from src.redis_service import redis_client, listen_to_channel
 from src.utils import is_user_recipient
 
 
+class AsyncContextManager:
+
+    def __init__(self, listener):
+        self.listener = listener
+
+    async def __aenter__(self):
+        return self.listener
+
+    async def __aexit__(self, exc_type, exc, tb):
+        pass
+
+
 class RedisStub:
 
     def __init__(self, message):
         self.message = message
 
     def pubsub(self):
-        return self.Listener(self.message)
+        return AsyncContextManager(self.Listener(self.message))
 
     class Listener:
 
@@ -47,5 +59,6 @@ class TestRedisService(IsolatedAsyncioTestCase):
         generator = listen_to_channel(
             is_user_recipient, "user_id", RedisStub(CORRECT_MESSAGE_MOCK)
         )
+
         message = await generator.__anext__()
         self.assertEqual(message, {"data": {"recipient_id": "user_id"}})
