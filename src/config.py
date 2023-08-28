@@ -8,7 +8,7 @@ class Config:
         REDIS_PORT = "REDIS_PORT"
         PUSH_NOTIFICATIONS_CHANNEL = "PUSH_NOTIFICATIONS_CHANNEL"
     else:
-        MAIN_HOST = os.getenv("MAIN_HOST", "https://alexandrzhydyk.pythonanywhere.com/")
+        MAIN_HOST = os.getenv("MAIN_HOST", "localhost")
         # MAIN_HOST = os.getenv("MAIN_HOST", "http://192.168.3.32:8000")
         REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
         # REDIS_HOST = os.getenv("REDIS_HOST", "192.168.3.61")
