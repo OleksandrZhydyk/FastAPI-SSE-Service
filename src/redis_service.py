@@ -30,9 +30,5 @@ async def listen_to_channel(filter_func: Callable, user_id: str, redis_conn: Red
             if message.get("type") == "message":
                 message = json.loads(message["data"])
                 if filter_func(user_id, message):
-                    print(message)
                     yield {"data": message}
-                    continue
-            if message.get("type") == "error":
-                print(message)
-                break
+                continue
